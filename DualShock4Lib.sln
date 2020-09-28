@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIDTesting", "HIDTesting\HIDTesting.csproj", "{3EAE75CF-CF7B-451A-B502-B9AC5D0AB859}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DualShock4Lib", "DualShock4Lib\DualShock4Lib.csproj", "{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EAE75CF-CF7B-451A-B502-B9AC5D0AB859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAE75CF-CF7B-451A-B502-B9AC5D0AB859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAE75CF-CF7B-451A-B502-B9AC5D0AB859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAE75CF-CF7B-451A-B502-B9AC5D0AB859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {757484F7-9FC2-45E3-AE19-D16DD345A96C}
+	EndGlobalSection
+EndGlobal
