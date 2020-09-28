@@ -48,7 +48,7 @@ namespace HIDTesting
 			Assert.IsNotNull(data);
 
 			// Check report id
-			var expectedReportId = Controllers.IsConnectedToUsb(device) ? 0x01 : 0x11;
+			var expectedReportId = (device.Capabilities.InputReportByteLength == 64) ? 0x01 : 0x11;
 			Assert.AreEqual(expectedReportId, data[0]);
 
 			// Dump
@@ -79,14 +79,13 @@ namespace HIDTesting
 			// Get input report
 			var device = HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4).FirstOrDefault();
 			var data = HidWrapper.Devices.GetInputReport(device);
-			bool viaUSB = false;
+			bool viaUSB = (device.Capabilities.InputReportByteLength == 64);
 
 			// Get battery state
 			BatteryState battery = BatteryState.GetBatteryState(data, viaUSB);
 
 			// Test
 			Assert.IsNotNull(battery);
-			Assert.AreEqual(ChargingState.Discharging, battery.ChargingState);
 			System.Diagnostics.Debug.WriteLine($"{JsonSerializer.Serialize(battery, serializerOptions)}");
 		}
 	}
