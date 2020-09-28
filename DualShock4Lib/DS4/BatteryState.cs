@@ -36,20 +36,23 @@ namespace DualShock4Lib
 				int charging = data[offset] & 0x10;
 
 				// Bluetooth power level is between 0 to 9
+				// DS4Windows says the max BT level is 8
 				// Cabled power level is between 0 to 10
 				// Cabled power level > 10 means fully charged
+				const double maxBatteryBT = 8.0;
+				const double maxBatteryUSB = 10.0;
 				double batteryLevel = -1;
 				var batteryCharging = ChargingState.Discharging;
 
 				// Get values
 				if (charging != 0)
 				{
-					batteryLevel = Math.Min(level, 10) * 10.0;
+					batteryLevel = Math.Min(level, maxBatteryUSB) * 10.0;
 					batteryCharging = level > 10 ? ChargingState.FullyCharged : ChargingState.Charging;
 				}
 				else
 				{
-					batteryLevel = (level / 9.0) * 100;
+					batteryLevel = (Math.Min(level, maxBatteryBT) / maxBatteryBT) * 100;
 					batteryCharging = ChargingState.Discharging;
 				}
 
