@@ -44,9 +44,14 @@ namespace HIDTesting
 			// Get input report
 			var data = HidWrapper.Devices.GetInputReport(device);
 
-			// Check
+			// Check data is there
 			Assert.IsNotNull(data);
-			Assert.AreEqual(17, data[0]);
+
+			// Check report id
+			var expectedReportId = Controllers.IsConnectedToUsb(device) ? 0x01 : 0x11;
+			Assert.AreEqual(expectedReportId, data[0]);
+
+			// Dump
 			System.Diagnostics.Debug.WriteLine($"{JsonSerializer.Serialize(data, serializerOptions)}");
 		}
 

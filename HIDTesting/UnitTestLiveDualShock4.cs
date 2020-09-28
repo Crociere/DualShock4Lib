@@ -33,9 +33,15 @@ namespace HIDTesting
 			Assert.IsNotNull(device);
 
 			byte[] report = Controllers.GetHidReport(device);
-			Assert.IsNotNull(report);
-			Assert.AreEqual(17, report[0]);
 
+			// Check data is there
+			Assert.IsNotNull(report);
+
+			// Check report id
+			var expectedReportId = Controllers.IsConnectedToUsb(device) ? 0x01 : 0x11;
+			Assert.AreEqual(expectedReportId, report[0]);
+
+			// Dump
 			System.Diagnostics.Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(report));
 		}
 
