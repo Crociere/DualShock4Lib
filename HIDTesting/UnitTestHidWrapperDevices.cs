@@ -12,9 +12,6 @@ namespace HIDTesting
 		// Debug output formatting
 		static JsonSerializerOptions serializerOptions = new JsonSerializerOptions{ WriteIndented = true };
 
-		// Filter devices for DS4 controllers
-		static Func<HidWrapper.HidDevice, bool> ds4Filter = x => x.Attributes.VendorId == 1356 && x.Attributes.ProductId == 2508;
-
 		[TestMethod]
 		public void ListLiveDevices()
 		{
@@ -28,7 +25,7 @@ namespace HIDTesting
 		public void TestEnumerateDevices()
 		{
 			// Get first device
-			var device = HidWrapper.Devices.EnumerateDevices().Where(ds4Filter).FirstOrDefault();
+			var device = HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4).FirstOrDefault();
 			
 			// Check
 			Assert.IsNotNull(device);
@@ -39,7 +36,7 @@ namespace HIDTesting
 		public void TestGetInputReport()
 		{
 			// Get first device
-			var device = HidWrapper.Devices.EnumerateDevices().Where(ds4Filter).FirstOrDefault();
+			var device = HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4).FirstOrDefault();
 			
 			// Check
 			Assert.IsNotNull(device);
@@ -57,7 +54,7 @@ namespace HIDTesting
 		public void TestMultipleGetInputReports()
 		{
 			// Iterate over controllers			
-			foreach(var device in HidWrapper.Devices.EnumerateDevices().Where(ds4Filter))
+			foreach(var device in HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4))
 			{
 				// Check
 				Assert.IsNotNull(device);
@@ -75,7 +72,7 @@ namespace HIDTesting
 		public void TestGetBatteryState()
 		{
 			// Get input report
-			var device = HidWrapper.Devices.EnumerateDevices().Where(ds4Filter).FirstOrDefault();
+			var device = HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4).FirstOrDefault();
 			var data = HidWrapper.Devices.GetInputReport(device);
 			bool viaUSB = false;
 

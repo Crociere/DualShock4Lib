@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HidWrapper;
@@ -7,13 +8,19 @@ namespace DualShock4Lib
 	internal static class Controllers
 	{
 		internal static int VendorId => 1356;
-		internal static int ProductId => 2508;
+		internal static int[] ProductIds => new int[] { 1476, 2508 };
+		
+		// Test if device is a DS4
+		internal static bool DeviceIsDS4(HidDevice device)
+		{
+			return device.Attributes.VendorId == VendorId 
+				&& ProductIds.Contains(device.Attributes.ProductId);
+		}
 
 		// Get all DS4 controllers
 		internal static IEnumerable<HidDevice> GetControllers()
 		{
-			return Devices.EnumerateDevices()
-				.Where(x => x.Attributes.VendorId == VendorId && x.Attributes.ProductId == ProductId);
+			return Devices.EnumerateDevices().Where(DeviceIsDS4);
 		}
 
 		// Test if device is connected via USB
