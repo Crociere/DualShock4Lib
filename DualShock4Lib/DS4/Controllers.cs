@@ -26,12 +26,17 @@ namespace DualShock4Lib
 		// Test if device is connected via USB
 		internal static bool IsConnectedToUsb(HidDevice device)
 		{
+			// InputReportByteLength is used as an indicator for connection type
 			return (device.Capabilities.InputReportByteLength == 64);
 		}
 
 		// Get input report from device
 		internal static byte[] GetHidReport(HidDevice device)
 		{
+			// If bluetooth, ask for feature report 0x02 to obtain input report 0x11
+			if (!IsConnectedToUsb(device)) Devices.GetFeatureReport(device, 0x02);
+
+			// Get input report
 			return Devices.GetInputReport(device);
 		}
 	}

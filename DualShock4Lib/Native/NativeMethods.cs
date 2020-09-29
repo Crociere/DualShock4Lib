@@ -55,15 +55,24 @@ internal static partial class NativeMethods
 	// Reads data from the specified file or input/output (I/O) device
 	[DllImport("kernel32.dll", SetLastError = true)]
 	internal static extern bool ReadFile(
-		SafeFileHandle handle,
-		IntPtr bytes,
-		uint numBytesToRead,
-		out uint numBytesRead,
+		SafeFileHandle handle, 
+		byte[] bytes, 
+		uint numBytesToRead, 
+		out uint numBytesRead, 
 		ref NativeOverlapped overlapped);
+
+	// Returns a feature report from a specified top-level collection.
+	[DllImport("hid.dll", SetLastError = true)]
+	internal static extern bool HidD_GetFeature(
+		SafeFileHandle HidDeviceObject,
+		byte[] ReportBuffer,
+		int ReportBufferLength);
 
 	// Returns a top-level collection's preparsed data
 	[DllImport("hid.dll", SetLastError = true)]
-	internal static extern bool HidD_GetPreparsedData(SafeFileHandle HidDeviceObject, ref IntPtr PreparsedData);
+	internal static extern bool HidD_GetPreparsedData(
+		SafeFileHandle HidDeviceObject, 
+		ref IntPtr PreparsedData);
 
 	// Releases the resources that the HID class driver allocated to hold a top-level collection's preparsed data
 	[DllImport("hid.dll", SetLastError = true)]
@@ -71,7 +80,9 @@ internal static partial class NativeMethods
 
 	// Returns a top-level collection's HIDP_CAPS structure
 	[DllImport("hid.dll", SetLastError = true)]
-	internal static extern uint HidP_GetCaps(IntPtr PreparsedData, ref HIDP_CAPS Capabilities);
+	internal static extern uint HidP_GetCaps(
+		IntPtr PreparsedData, 
+		ref HIDP_CAPS Capabilities);
 
 	// Returns the attributes of a specified top-level collection
 	[DllImport("hid.dll", CharSet = CharSet.Auto, SetLastError = true)]

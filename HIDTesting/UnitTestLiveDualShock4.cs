@@ -27,12 +27,17 @@ namespace HIDTesting
 		}
 
 		[TestMethod]
-		public void TestGetHidReport()
+		public void TestGetHidInputReport()
 		{
+			// Get device
 			var device = Controllers.GetControllers().FirstOrDefault();
 			Assert.IsNotNull(device);
 
+			// Get report
 			byte[] report = Controllers.GetHidReport(device);
+
+			// Dump
+			System.Diagnostics.Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(report));
 
 			// Check data is there
 			Assert.IsNotNull(report);
@@ -40,9 +45,7 @@ namespace HIDTesting
 			// Check report id
 			var expectedReportId = Controllers.IsConnectedToUsb(device) ? 0x01 : 0x11;
 			Assert.AreEqual(expectedReportId, report[0]);
-
-			// Dump
-			System.Diagnostics.Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(report));
+			System.Diagnostics.Debug.WriteLine($"Report ID: {report[0]}");
 		}
 
 		[TestMethod]
