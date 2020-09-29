@@ -5,9 +5,9 @@ namespace DualShock4Lib
 	// Possible charging states
 	public enum ChargingState
 	{
+		Discharging,
 		Charging,
-		FullyCharged,
-		Discharging
+		FullyCharged
 	}
 
 	public class BatteryState
