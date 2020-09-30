@@ -25,7 +25,7 @@ namespace HIDTesting
 		public void TestEnumerateDevices()
 		{
 			// Get first device
-			var device = HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4).FirstOrDefault();
+			var device = HidWrapper.Devices.EnumerateDevices().Where(DeviceIdentity.IsDS4).FirstOrDefault();
 			
 			// Check
 			Assert.IsNotNull(device);
@@ -36,7 +36,7 @@ namespace HIDTesting
 		public void TestGetHidFeatureReport()
 		{
 			// Get first device
-			var device = HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4).FirstOrDefault();
+			var device = HidWrapper.Devices.EnumerateDevices().Where(DeviceIdentity.IsDS4).FirstOrDefault();
 			
 			// Check
 			Assert.IsNotNull(device);
@@ -52,7 +52,7 @@ namespace HIDTesting
 		public void TestGetInputReport()
 		{
 			// Get first device
-			var device = HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4).FirstOrDefault();
+			var device = HidWrapper.Devices.EnumerateDevices().Where(DeviceIdentity.IsDS4).FirstOrDefault();
 			
 			// Check
 			Assert.IsNotNull(device);
@@ -86,7 +86,7 @@ namespace HIDTesting
 		public void TestMultipleGetInputReports()
 		{
 			// Iterate over controllers			
-			foreach(var device in HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4))
+			foreach(var device in HidWrapper.Devices.EnumerateDevices().Where(DeviceIdentity.IsDS4))
 			{
 				// Check
 				Assert.IsNotNull(device);
@@ -104,7 +104,7 @@ namespace HIDTesting
 		public void TestGetBatteryState()
 		{
 			// Get device
-			var device = HidWrapper.Devices.EnumerateDevices().Where(Controllers.DeviceIsDS4).FirstOrDefault();
+			var device = HidWrapper.Devices.EnumerateDevices().Where(DeviceIdentity.IsDS4).FirstOrDefault();
 
 			// Get feature report if needed
 			bool viaUSB = (device.Capabilities.InputReportByteLength == 64);

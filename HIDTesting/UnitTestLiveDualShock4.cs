@@ -6,10 +6,13 @@ namespace HIDTesting
 	[TestClass]
 	public partial class UnitTestLiveDualShock4
 	{
+		// Shared controllers provider
+		private static IControllersProvider controllers = new LiveControllers();
+
 		[TestMethod]
 		public void TestGetFirstController()
 		{
-			var controller = Controllers.GetFirstController();
+			var controller = controllers.GetFirstController();
 			Assert.IsNotNull(controller);
 			Assert.AreEqual(1356, controller.VendorId);
 			Assert.AreEqual(2508, controller.ProductId);
@@ -18,7 +21,7 @@ namespace HIDTesting
 		[TestMethod]
 		public void TestIsNotConnectedToUsb()
 		{
-			var device = Controllers.GetFirstController();
+			var device = controllers.GetFirstController();
 			Assert.IsNotNull(device);
 			Assert.AreEqual(false, device.IsConnectedToUsb);
 		}
@@ -27,7 +30,7 @@ namespace HIDTesting
 		public void TestGetHidInputReport()
 		{
 			// Get device
-			var device = Controllers.GetFirstController() as Controller;
+			var device = controllers.GetFirstController() as Controller;
 			Assert.IsNotNull(device);
 
 			// Get report
@@ -48,7 +51,7 @@ namespace HIDTesting
 		[TestMethod]
 		public void TestFirstDS4Battery()
 		{
-			IBatteryState battery = Controllers.GetFirstController().GetBatteryState();
+			IBatteryState battery = controllers.GetFirstController().GetBatteryState();
 			Assert.IsNotNull(battery);
 			System.Diagnostics.Debug.WriteLine($"Battery: {battery.Level}% Charging: {battery.ChargingState}");
 		}
@@ -56,7 +59,7 @@ namespace HIDTesting
 		[TestMethod]
 		public void TestMultipleDS4Batteries()
 		{
-			foreach (var controller in Controllers.GetControllers())
+			foreach (var controller in controllers.GetControllers())
 			{
 				IBatteryState battery = controller.GetBatteryState();
 				Assert.IsNotNull(battery);
