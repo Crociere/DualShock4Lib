@@ -5,7 +5,7 @@ using HidWrapper;
 
 namespace DualShock4Lib
 {
-	internal static class Controllers
+	public static class Controllers
 	{
 		internal static int VendorId => 1356;
 		internal static int[] ProductIds => new int[] { 1476, 2508 };
@@ -18,7 +18,7 @@ namespace DualShock4Lib
 		}
 
 		// Get all DS4 controllers
-		internal static IEnumerable<Controller> GetControllers()
+		public static IEnumerable<Controller> GetControllers()
 		{
 			foreach(var device in Devices.EnumerateDevices().Where(DeviceIsDS4))
 			{
@@ -27,7 +27,7 @@ namespace DualShock4Lib
 		}
 
 		// Get first DS4 controller
-		internal static Controller GetFirstController()
+		public static Controller GetFirstController()
 		{
 			// Get first device
 			var device = Devices.EnumerateDevices().Where(DeviceIsDS4).FirstOrDefault();
