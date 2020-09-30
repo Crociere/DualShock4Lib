@@ -27,7 +27,7 @@ namespace HIDTesting
 		public void TestGetHidInputReport()
 		{
 			// Get device
-			var device = Controllers.GetFirstController();
+			var device = Controllers.GetFirstController() as Controller;
 			Assert.IsNotNull(device);
 
 			// Get report
@@ -48,7 +48,7 @@ namespace HIDTesting
 		[TestMethod]
 		public void TestFirstDS4Battery()
 		{
-			BatteryState battery = Controllers.GetFirstController().GetBatteryState();
+			IBatteryState battery = Controllers.GetFirstController().GetBatteryState();
 			Assert.IsNotNull(battery);
 			System.Diagnostics.Debug.WriteLine($"Battery: {battery.Level}% Charging: {battery.ChargingState}");
 		}
@@ -58,7 +58,7 @@ namespace HIDTesting
 		{
 			foreach (var controller in Controllers.GetControllers())
 			{
-				BatteryState battery = controller.GetBatteryState();
+				IBatteryState battery = controller.GetBatteryState();
 				Assert.IsNotNull(battery);
 				System.Diagnostics.Debug.WriteLine($"Battery: {battery.Level}% Charging: {battery.ChargingState}");
 			}

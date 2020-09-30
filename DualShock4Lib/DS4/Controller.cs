@@ -3,7 +3,17 @@ using HidWrapper;
 
 namespace DualShock4Lib
 {
-	public class Controller
+	public interface IController
+	{
+		ushort VendorId { get; }
+		ushort ProductId { get; }
+		string Manufacturer { get; }
+		string Product { get; }
+		bool IsConnectedToUsb { get; }
+		IBatteryState GetBatteryState();
+	}
+
+	public class Controller : IController
 	{
 		private HidDevice device;
 
@@ -42,7 +52,7 @@ namespace DualShock4Lib
 		}
 
 		// Requests current battery state for device
-		public BatteryState GetBatteryState()
+		public IBatteryState GetBatteryState()
 		{
 			// Get input report from device
 			byte[] report = GetInputReport();

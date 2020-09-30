@@ -18,7 +18,7 @@ namespace DualShock4Lib
 		}
 
 		// Get all DS4 controllers
-		public static IEnumerable<Controller> GetControllers()
+		public static IEnumerable<IController> GetControllers()
 		{
 			foreach(var device in Devices.EnumerateDevices().Where(DeviceIsDS4))
 			{
@@ -27,7 +27,7 @@ namespace DualShock4Lib
 		}
 
 		// Get first DS4 controller
-		public static Controller GetFirstController()
+		public static IController GetFirstController()
 		{
 			// Get first device
 			var device = Devices.EnumerateDevices().Where(DeviceIsDS4).FirstOrDefault();

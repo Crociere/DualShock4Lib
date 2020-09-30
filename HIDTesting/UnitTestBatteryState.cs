@@ -15,7 +15,7 @@ namespace HIDTesting
 			bool viaUSB = false;
 
 			// Get battery state
-			BatteryState battery = new BatteryState(data, viaUSB);
+			IBatteryState battery = new BatteryState(data, viaUSB);
 
 			// Test
 			Assert.IsNotNull(battery);

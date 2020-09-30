@@ -10,7 +10,13 @@ namespace DualShock4Lib
 		FullyCharged
 	}
 
-	public class BatteryState
+	public interface IBatteryState
+	{
+		double Level { get; }
+		ChargingState ChargingState { get; }
+	}
+
+	public class BatteryState : IBatteryState
 	{
 		// Charge level as a percentage
 		public double Level { get; private set; }

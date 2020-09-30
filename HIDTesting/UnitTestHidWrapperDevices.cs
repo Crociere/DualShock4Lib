@@ -114,7 +114,7 @@ namespace HIDTesting
 			var data = HidWrapper.Devices.GetInputReport(device);
 
 			// Get battery state
-			BatteryState battery = new BatteryState(data, viaUSB);
+			IBatteryState battery = new BatteryState(data, viaUSB);
 
 			// Test
 			Assert.IsNotNull(battery);
