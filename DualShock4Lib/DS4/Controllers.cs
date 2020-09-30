@@ -18,26 +18,22 @@ namespace DualShock4Lib
 		}
 
 		// Get all DS4 controllers
-		internal static IEnumerable<HidDevice> GetControllers()
+		internal static IEnumerable<Controller> GetControllers()
 		{
-			return Devices.EnumerateDevices().Where(DeviceIsDS4);
+			foreach(var device in Devices.EnumerateDevices().Where(DeviceIsDS4))
+			{
+				yield return new Controller(device);
+			}
 		}
 
-		// Test if device is connected via USB
-		internal static bool IsConnectedToUsb(HidDevice device)
+		// Get first DS4 controller
+		internal static Controller GetFirstController()
 		{
-			// InputReportByteLength is used as an indicator for connection type
-			return (device.Capabilities.InputReportByteLength == 64);
-		}
+			// Get first device
+			var device = Devices.EnumerateDevices().Where(DeviceIsDS4).FirstOrDefault();
 
-		// Get input report from device
-		internal static byte[] GetHidReport(HidDevice device)
-		{
-			// If bluetooth, ask for feature report 0x02 to obtain input report 0x11
-			if (!IsConnectedToUsb(device)) Devices.GetFeatureReport(device, 0x02);
-
-			// Get input report
-			return Devices.GetInputReport(device);
+			// Return controller
+			return new Controller(device);
 		}
 	}
 }

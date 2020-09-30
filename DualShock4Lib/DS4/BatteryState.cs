@@ -13,16 +13,14 @@ namespace DualShock4Lib
 	public class BatteryState
 	{
 		// Charge level as a percentage
-		public double Level { get; set; }
+		public double Level { get; private set; }
 
 		// Charging state
-		public ChargingState ChargingState { get; set; }
+		public ChargingState ChargingState { get; private set; }
 
 		// Returns battery state for input report data
-		internal static BatteryState GetBatteryState(byte[] data, bool viaUSB)
+		internal BatteryState(byte[] data, bool viaUSB)
 		{
-			BatteryState result = null;
-
 			// Check report
 			if (data != null)
 			{
@@ -56,15 +54,10 @@ namespace DualShock4Lib
 					batteryCharging = ChargingState.Discharging;
 				}
 
-				// Create object
-				result = new BatteryState
-				{ 
-					Level = batteryLevel, 
-					ChargingState = batteryCharging
-				};
+				// Set properties
+				this.Level = batteryLevel;
+				this.ChargingState = batteryCharging;
 			}
-
-			return result;
 		}
 	}
 }

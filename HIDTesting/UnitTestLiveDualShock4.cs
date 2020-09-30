@@ -1,4 +1,3 @@
-using System.Linq;
 using DualShock4Lib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,31 +9,29 @@ namespace HIDTesting
 		[TestMethod]
 		public void TestGetFirstController()
 		{
-			var device = Controllers.GetControllers().FirstOrDefault();
-			Assert.IsNotNull(device);
-			Assert.AreEqual(1356, device.Attributes.VendorId);
-			Assert.AreEqual(2508, device.Attributes.ProductId);
+			var controller = Controllers.GetFirstController();
+			Assert.IsNotNull(controller);
+			Assert.AreEqual(1356, controller.VendorId);
+			Assert.AreEqual(2508, controller.ProductId);
 		}
 
 		[TestMethod]
 		public void TestIsNotConnectedToUsb()
 		{
-			var device = Controllers.GetControllers().FirstOrDefault();
+			var device = Controllers.GetFirstController();
 			Assert.IsNotNull(device);
-
-			var result = Controllers.IsConnectedToUsb(device);
-			Assert.AreEqual(false, result);
+			Assert.AreEqual(false, device.IsConnectedToUsb);
 		}
 
 		[TestMethod]
 		public void TestGetHidInputReport()
 		{
 			// Get device
-			var device = Controllers.GetControllers().FirstOrDefault();
+			var device = Controllers.GetFirstController();
 			Assert.IsNotNull(device);
 
 			// Get report
-			byte[] report = Controllers.GetHidReport(device);
+			byte[] report = device.GetInputReport();
 
 			// Dump
 			System.Diagnostics.Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(report));
@@ -43,7 +40,7 @@ namespace HIDTesting
 			Assert.IsNotNull(report);
 
 			// Check report id
-			var expectedReportId = Controllers.IsConnectedToUsb(device) ? 0x01 : 0x11;
+			var expectedReportId = device.IsConnectedToUsb ? 0x01 : 0x11;
 			Assert.AreEqual(expectedReportId, report[0]);
 			System.Diagnostics.Debug.WriteLine($"Report ID: {report[0]}");
 		}
@@ -51,7 +48,7 @@ namespace HIDTesting
 		[TestMethod]
 		public void TestFirstDS4Battery()
 		{
-			BatteryState battery = Batteries.GetBatteryState();
+			BatteryState battery = Controllers.GetFirstController().GetBatteryState();
 			Assert.IsNotNull(battery);
 			System.Diagnostics.Debug.WriteLine($"Battery: {battery.Level}% Charging: {battery.ChargingState}");
 		}
@@ -59,10 +56,9 @@ namespace HIDTesting
 		[TestMethod]
 		public void TestMultipleDS4Batteries()
 		{
-			var batteries = Batteries.GetAllBatteryStates();
-			
-			foreach (var battery in batteries)
+			foreach (var controller in Controllers.GetControllers())
 			{
+				BatteryState battery = controller.GetBatteryState();
 				Assert.IsNotNull(battery);
 				System.Diagnostics.Debug.WriteLine($"Battery: {battery.Level}% Charging: {battery.ChargingState}");
 			}
