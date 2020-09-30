@@ -10,7 +10,7 @@ namespace DualShock4Lib
 		IController GetFirstController();
 	}
 
-	internal class LiveControllers : IControllersProvider
+	public class LiveControllers : IControllersProvider
 	{
 		// Get all DS4 controllers
 		public IEnumerable<IController> GetControllers()
