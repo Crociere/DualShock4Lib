@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIDTesting", "HIDTesting\HI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DualShock4Lib", "DualShock4Lib\DualShock4Lib.csproj", "{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS4BatteryCheck", "DS4BatteryCheck\DS4BatteryCheck.csproj", "{9B83FC1A-0360-48A4-96EC-58A97E89EFC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E2C1F44-435E-42BB-829D-F7381DDC6F6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B83FC1A-0360-48A4-96EC-58A97E89EFC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B83FC1A-0360-48A4-96EC-58A97E89EFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B83FC1A-0360-48A4-96EC-58A97E89EFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B83FC1A-0360-48A4-96EC-58A97E89EFC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
