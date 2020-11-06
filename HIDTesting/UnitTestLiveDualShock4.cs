@@ -7,7 +7,7 @@ namespace HIDTesting
 	public partial class UnitTestLiveDualShock4
 	{
 		// Shared controllers provider
-		private static IControllersProvider controllers = new LiveControllers();
+		private static IControllersProvider controllers = new Controllers();
 
 		[TestMethod]
 		public void TestGetFirstController()
@@ -59,7 +59,7 @@ namespace HIDTesting
 		[TestMethod]
 		public void TestMultipleDS4Batteries()
 		{
-			foreach (var controller in controllers.GetControllers())
+			foreach (var controller in controllers.GetAllControllers())
 			{
 				IBatteryState battery = controller.GetBatteryState();
 				Assert.IsNotNull(battery);

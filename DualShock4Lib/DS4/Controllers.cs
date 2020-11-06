@@ -6,14 +6,14 @@ namespace DualShock4Lib
 {
 	public interface IControllersProvider
 	{
-		IEnumerable<IController> GetControllers();
+		IEnumerable<IController> GetAllControllers();
 		IController GetFirstController();
 	}
 
-	public class LiveControllers : IControllersProvider
+	public class Controllers : IControllersProvider
 	{
 		// Get all DS4 controllers
-		public IEnumerable<IController> GetControllers()
+		public IEnumerable<IController> GetAllControllers()
 		{
 			foreach(var device in Devices.EnumerateDevices().Where(DeviceIdentity.IsDS4))
 			{
