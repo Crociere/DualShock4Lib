@@ -9,6 +9,7 @@ namespace DualShock4Lib
 		ushort ProductId { get; }
 		string Manufacturer { get; }
 		string Product { get; }
+		string DevicePath { get; }
 		bool IsConnectedToUsb { get; }
 		IBatteryState GetBatteryState();
 	}
@@ -34,6 +35,7 @@ namespace DualShock4Lib
 		public ushort ProductId => device.Attributes.ProductId;
 		public string Manufacturer => device.Manufacturer;
 		public string Product => device.Product;
+		public string DevicePath => device.DevicePath;
 
 		// Returns true if connected via USB
 		public bool IsConnectedToUsb
